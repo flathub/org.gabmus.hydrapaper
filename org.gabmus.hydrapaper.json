@@ -2,7 +2,7 @@
     "app-id": "org.gabmus.hydrapaper",
     "command": "hydrapaper",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.28",
+    "runtime-version": "3.30",
     "sdk": "org.gnome.Sdk",
     "finish-args": [
         "--share=ipc",
@@ -57,8 +57,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/python-pillow/Pillow/archive/5.3.0.tar.gz",
-                    "sha256": "9de4853d8b640c0185665735a1c3266b6d51636b3a3d8e3ea7876c485194b6e1"
+                    "url": "https://github.com/python-pillow/Pillow/archive/5.4.1.tar.gz",
+                    "sha256": "d233c2e63414535281c572d2b4debd7de8a205b341ffc7db0f48f3f4d199fbc0"
                 },
                 {
                     "type": "shell",
@@ -155,8 +155,8 @@
             "config-opts": ["--buildtype=release"],
             "sources": [{
                 "type": "archive",
-                "url": "https://gitlab.com/gabmus/HydraPaper/-/archive/1.4.1/HydraPaper-1.4.1.tar.gz",
-                "sha256": "c0f2fdae156defa381dbc45c1008a09c653c0a379eed68b320fb386e3afd8023"
+                "url": "https://gitlab.com/gabmus/HydraPaper/-/archive/1.4.2/HydraPaper-1.4.2.tar.gz",
+                "sha256": "a79f7a4c84a343823a6cd817782c89ba4ce42b191ab2e04c0d9afa0261554997"
             }]
         }
     ]
