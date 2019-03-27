@@ -69,94 +69,14 @@
             ]
         },
         {
-            "name": "python-gmconfig",
-            "buildsystem": "simple",
-            "build-options": {
-                "arch": {
-                    "i386": {
-                        "env": {
-                            "MAX_CONCURRENCY": "1"
-                        }
-                    },
-                    "arm": {
-                        "env": {
-                            "MAX_CONCURRENCY": "1"
-                        }
-                    }
-                }
-            },
-            "ensure-writable": [
-                "/lib/python*/site-packages/easy-install.pth",
-                "/lib/python*/site-packages/setuptools.pth",
-                "/app/lib/python*/site-packages/easy-install.pth",
-                "/app/lib/python*/site-packages/setuptools.pth"
-            ],
-            "build-commands": [
-                "python3 setup.py install --prefix=/app --root=/"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://gitlab.com/gabmus/python-gmconfig/-/archive/1.0.1/python-gmconfig-1.0.1.tar.gz",
-                    "sha256": "3172b45e30c8105ae70da36b57c0752007b2924d8db23339c152fe70f12575b1"
-                },
-                {
-                    "type": "shell",
-                    "commands": [
-                        "sed -i 's/if not platform_/if not dirs/' setup.py"
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "python-gmgtk",
-            "buildsystem": "simple",
-            "build-options": {
-                "arch": {
-                    "i386": {
-                        "env": {
-                            "MAX_CONCURRENCY": "1"
-                        }
-                    },
-                    "arm": {
-                        "env": {
-                            "MAX_CONCURRENCY": "1"
-                        }
-                    }
-                }
-            },
-            "ensure-writable": [
-                "/lib/python*/site-packages/easy-install.pth",
-                "/lib/python*/site-packages/setuptools.pth",
-                "/app/lib/python*/site-packages/easy-install.pth",
-                "/app/lib/python*/site-packages/setuptools.pth"
-            ],
-            "build-commands": [
-                "python3 setup.py install --prefix=/app --root=/"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://gitlab.com/gabmus/python-gmgtk/-/archive/1.0/python-gmgtk-1.0.tar.gz",
-                    "sha256": "070ad9d595bd358f788d4419d780f5dbc8d25d9857c33e5826760def05e4488f"
-                },
-                {
-                    "type": "shell",
-                    "commands": [
-                        "sed -i 's/if not platform_/if not dirs/' setup.py"
-                    ]
-                }
-            ]
-        },
-        {
             "name": "hydrapaper",
             "buildsystem": "meson",
             "builddir": true,
             "config-opts": ["--buildtype=release"],
             "sources": [{
                 "type": "archive",
-                "url": "https://gitlab.com/gabmus/HydraPaper/-/archive/1.4.2/HydraPaper-1.4.2.tar.gz",
-                "sha256": "a79f7a4c84a343823a6cd817782c89ba4ce42b191ab2e04c0d9afa0261554997"
+                "url": "https://gitlab.com/gabmus/HydraPaper/-/archive/1.5/HydraPaper-1.5.tar.gz",
+                "sha256": "a53b16629a703aa49e27051c2d517695eabbae0657ddf2f72b77abb04e4f4435"
             }]
         }
     ]
