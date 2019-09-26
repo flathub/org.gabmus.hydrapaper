@@ -9,9 +9,12 @@
         "--socket=x11",
         "--socket=wayland",
         "--talk-name=org.gnome.SettingsDaemon",
+        "--talk-name=org.freedesktop.Flatpak",
         "--filesystem=home:ro",
         "--filesystem=xdg-run/dconf",
         "--filesystem=~/.config/dconf:ro",
+        "--filesystem=~/.config/sway/config:rw",
+        "--filesystem=~/.swaylock/config:rw",
         "--talk-name=ca.desrt.dconf",
         "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
     ],
@@ -89,8 +92,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/mate-desktop/mate-desktop/archive/v1.23.1.tar.gz",
-                    "sha256": "4bfc81aaaba468b4e39d6aec7fe772d3405f3766058c49168f65cfe4a14e0b47"
+                    "url": "https://github.com/mate-desktop/mate-desktop/archive/v1.23.2.tar.gz",
+                    "sha256": "8276408866c50508f754be8a3d5b5c57c0c8e365bab8abbf0595bd54aed8ee07"
                 }
             ]
         },
@@ -101,8 +104,8 @@
             "config-opts": ["--buildtype=release"],
             "sources": [{
                 "type": "archive",
-                "url": "https://gitlab.com/gabmus/HydraPaper/-/archive/1.9.4/HydraPaper-1.9.4.tar.gz",
-                "sha256": "6ecf36c618f6e1ac6cbff90ecab30c346f5c720c922b8795fa2bb5e5ea3819e7"
+                "url": "https://gitlab.com/gabmus/HydraPaper/-/archive/1.9.5/HydraPaper-1.9.5.tar.gz",
+                "sha256": "b715d189137265aae17b280eab0b051f6bb00d34d3aa495e6a3af8292482d4f2"
             }]
         }
     ]
