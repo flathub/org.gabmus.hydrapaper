@@ -30,7 +30,7 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/libhandy",
-                    "tag": "0.83.0"
+                    "tag": "0.90.0"
                 }
             ]
         },
@@ -73,7 +73,25 @@
                 {
                     "type": "git",
                     "url": "https://github.com/mate-desktop/mate-desktop",
-                    "tag": "v1.24.0"
+                    "tag": "v1.25.0"
+                }
+            ]
+        },
+        {
+            "name": "cinnamon-desktop-background-gschema",
+            "buildsystem": "simple",
+            "build-commands": [
+                "glib-mkenums --comments '<!-- @comment@ -->' --fhead '<schemalist>' --vhead $'  <@type@ id=\\'org.cinnamon.desktop.@EnumName@\\'>' --vprod $'    <value nick=\\'@valuenick@\\' value=\\'@valuenum@\\'/>' --vtail '  </@type@>' --ftail '</schemalist>' libcinnamon-desktop/cdesktop-enums.h > org.cinnamon.desktop.enums.xml",
+                "install org.cinnamon.desktop.enums.xml /app/share/glib-2.0/schemas/",
+                "sed 's#@datadir@#\\/usr\\/share#g;s#_summary#summary#g;s#_description#description#g' schemas/org.cinnamon.desktop.background.gschema.xml.in.in > org.cinnamon.desktop.background.gschema.xml",
+                "install org.cinnamon.desktop.background.gschema.xml /app/share/glib-2.0/schemas/",
+                "glib-compile-schemas /app/share/glib-2.0/schemas"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/linuxmint/cinnamon-desktop",
+                    "tag": "4.6.4"
                 }
             ]
         },
@@ -88,7 +106,7 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GabMus/HydraPaper",
-                    "tag": "1.12"
+                    "tag": "2.0"
                 }
             ]
         }
