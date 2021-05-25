@@ -90,6 +90,10 @@
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GabMus/HydraPaper",
                     "tag": "2.0.3"
+                },
+                {
+                    "type": "patch",
+                    "path": "appdata.patch"
                 }
             ]
         }
