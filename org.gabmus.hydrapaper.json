@@ -2,47 +2,123 @@
     "app-id": "org.gabmus.hydrapaper",
     "command": "hydrapaper",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.36",
+    "runtime-version": "40",
     "sdk": "org.gnome.Sdk",
     "finish-args": [
         "--share=ipc",
-        "--socket=x11",
+        "--socket=fallback-x11",
         "--socket=wayland",
+        "--device=dri",
         "--talk-name=org.gnome.SettingsDaemon",
         "--talk-name=org.freedesktop.Flatpak",
+        "--talk-name=org.gnome.Mutter.DisplayConfig",
         "--filesystem=home:ro",
+        "--filesystem=xdg-config/autostart",
         "--filesystem=/usr/share/gnome:ro",
         "--filesystem=xdg-run/dconf",
         "--filesystem=~/.config/dconf:ro",
         "--filesystem=~/.config/sway/config:rw",
         "--filesystem=~/.swaylock/config:rw",
+        "--filesystem=/usr/share/backgrounds",
         "--talk-name=ca.desrt.dconf",
-        "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
+        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
+        "--own-name=org.gabmus.hydrapaper",
+        "--own-name=org.gabmus.hydrapaper.Daemon"
     ],
     "modules": [
         {
-            "name": "libhandy",
-            "buildsystem": "meson",
-            "config-opts": [
-                "--buildtype=release"
+            "name": "sassc",
+            "cleanup": [
+                "*"
             ],
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/libhandy",
-                    "tag": "1.0.0"
+                    "url": "https://github.com/sass/sassc.git",
+                    "tag": "3.6.1"
+                },
+                {
+                    "type": "script",
+                    "dest-filename": "autogen.sh",
+                    "commands": [
+                        "autoreconf -si"
+                    ]
+                }
+            ],
+            "modules": [
+                {
+                    "name": "libsass",
+                    "cleanup": [
+                        "*"
+                    ],
+                    "sources": [
+                        {
+                            "type": "git",
+                            "url": "https://github.com/sass/libsass.git",
+                            "tag": "3.6.4"
+                        },
+                        {
+                            "type": "script",
+                            "dest-filename": "autogen.sh",
+                            "commands": [
+                                "autoreconf -si"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "gtk",
+            "buildsystem": "meson",
+            "config-opts": [
+                "-Dtests=false"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/gtk",
+                    "tag": "4.3.1"
+                }
+            ]
+        },
+        {
+            "name": "pygobject",
+            "buildsystem": "meson",
+            "config-opts": [
+                "-Dtests=false"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/pygobject",
+                    "commit": "b15e81fc1ed78ef9c4dc2ac890e1ff99c62e9ed0"
+                },
+                {
+                    "type": "patch",
+                    "path": "172.patch",
+                    "sha256": "369cdb693d0e93e6a08e6df807d34f40f3531f244b3ec1ec8965ae45dc0d7f13"
+                }
+            ]
+        },
+        {
+            "name": "libadwaita",
+            "buildsystem": "meson",
+            "config-opts": [
+                "-Dexamples=false",
+                "-Dtests=false"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/libadwaita.git",
+                    "tag": "1.0.0-alpha.1"
                 }
             ]
         },
         {
             "name": "python-pillow",
             "buildsystem": "simple",
-            "ensure-writable": [
-                "/lib/python*/site-packages/easy-install.pth",
-                "/lib/python*/site-packages/setuptools.pth",
-                "/app/lib/python*/site-packages/easy-install.pth",
-                "/app/lib/python*/site-packages/setuptools.pth"
-            ],
             "build-commands": [
                 "python3 setup.py install --prefix=/app --root=/"
             ],
@@ -50,48 +126,21 @@
                 {
                     "type": "git",
                     "url": "https://github.com/python-pillow/Pillow",
-                    "tag": "7.2.0"
-                },
-                {
-                    "type": "shell",
-                    "commands": [
-                        "sed -i 's/if not platform_/if not dirs/' setup.py"
-                    ]
+                    "tag": "8.1.2"
                 }
             ]
         },
         {
-            "name": "mate-desktop-background-gschema",
+            "name": "python-dbus",
             "buildsystem": "simple",
             "build-commands": [
-                "mkdir -p /app/share/glib-2.0/schemas/",
-                "sed 's#@datadir@#\\/usr\\/share#g' schemas/org.mate.background.gschema.xml.in > schemas/org.mate.background.gschema.xml",
-                "install schemas/org.mate.background.gschema.xml /app/share/glib-2.0/schemas/",
-                "glib-compile-schemas /app/share/glib-2.0/schemas"
+                "python3 setup.py install --prefix=/app --root=/"
             ],
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://github.com/mate-desktop/mate-desktop",
-                    "tag": "v1.25.0"
-                }
-            ]
-        },
-        {
-            "name": "cinnamon-desktop-background-gschema",
-            "buildsystem": "simple",
-            "build-commands": [
-                "glib-mkenums --comments '<!-- @comment@ -->' --fhead '<schemalist>' --vhead $'  <@type@ id=\\'org.cinnamon.desktop.@EnumName@\\'>' --vprod $'    <value nick=\\'@valuenick@\\' value=\\'@valuenum@\\'/>' --vtail '  </@type@>' --ftail '</schemalist>' libcinnamon-desktop/cdesktop-enums.h > org.cinnamon.desktop.enums.xml",
-                "install org.cinnamon.desktop.enums.xml /app/share/glib-2.0/schemas/",
-                "sed 's#@datadir@#\\/usr\\/share#g;s#_summary#summary#g;s#_description#description#g' schemas/org.cinnamon.desktop.background.gschema.xml.in.in > org.cinnamon.desktop.background.gschema.xml",
-                "install org.cinnamon.desktop.background.gschema.xml /app/share/glib-2.0/schemas/",
-                "glib-compile-schemas /app/share/glib-2.0/schemas"
-            ],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://github.com/linuxmint/cinnamon-desktop",
-                    "tag": "4.6.4"
+                    "url": "https://gitlab.freedesktop.org/dbus/dbus-python",
+                    "tag": "dbus-python-1.2.16"
                 }
             ]
         },
@@ -100,13 +149,14 @@
             "buildsystem": "meson",
             "builddir": true,
             "config-opts": [
-                "--buildtype=release"
+                "--buildtype=release",
+                "-Denabledaemon=false"
             ],
             "sources": [
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GabMus/HydraPaper",
-                    "tag": "2.0.3"
+                    "tag": "3.0.0"
                 }
             ]
         }
