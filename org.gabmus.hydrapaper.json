@@ -2,7 +2,7 @@
     "app-id": "org.gabmus.hydrapaper",
     "command": "hydrapaper",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "40",
+    "runtime-version": "41",
     "sdk": "org.gnome.Sdk",
     "finish-args": [
         "--share=ipc",
@@ -27,92 +27,6 @@
     ],
     "modules": [
         {
-            "name": "sassc",
-            "cleanup": [
-                "*"
-            ],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://github.com/sass/sassc.git",
-                    "tag": "3.6.1"
-                },
-                {
-                    "type": "script",
-                    "dest-filename": "autogen.sh",
-                    "commands": [
-                        "autoreconf -si"
-                    ]
-                }
-            ],
-            "modules": [
-                {
-                    "name": "libsass",
-                    "cleanup": [
-                        "*"
-                    ],
-                    "sources": [
-                        {
-                            "type": "git",
-                            "url": "https://github.com/sass/libsass.git",
-                            "tag": "3.6.4"
-                        },
-                        {
-                            "type": "script",
-                            "dest-filename": "autogen.sh",
-                            "commands": [
-                                "autoreconf -si"
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "gtk",
-            "buildsystem": "meson",
-            "config-opts": [
-                "-Dtests=false"
-            ],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/gtk",
-                    "tag": "4.4.0"
-                }
-            ],
-            "modules": [
-                {
-                    "name": "wayland-protocols",
-                    "buildsystem": "meson",
-                    "config-opts": [
-                        "-Dtests=false"
-                    ],
-                    "sources": [
-                        {
-                            "type": "git",
-                            "url": "https://gitlab.freedesktop.org/wayland/wayland-protocols",
-                            "tag": "1.23"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "pygobject",
-            "buildsystem": "meson",
-            "config-opts": [
-                "-Dtests=false"
-            ],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/pygobject",
-                    "commit": "963c5f278e23d971a5bdf055c900b3ae156fbeb3"
-                }
-            ]
-        },
-        {
             "name": "libadwaita",
             "buildsystem": "meson",
             "config-opts": [
@@ -123,7 +37,51 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/libadwaita.git",
-                    "tag": "1.0.0-alpha.2"
+                    "tag": "1.0.0.alpha.4"
+                }
+            ],
+            "modules": [
+                {
+                    "name": "sassc",
+                    "cleanup": [
+                        "*"
+                    ],
+                    "sources": [
+                        {
+                            "type": "git",
+                            "url": "https://github.com/sass/sassc.git",
+                            "tag": "3.6.1"
+                        },
+                        {
+                            "type": "script",
+                            "dest-filename": "autogen.sh",
+                            "commands": [
+                                "autoreconf -si"
+                            ]
+                        }
+                    ],
+                    "modules": [
+                        {
+                            "name": "libsass",
+                            "cleanup": [
+                                "*"
+                            ],
+                            "sources": [
+                                {
+                                    "type": "git",
+                                    "url": "https://github.com/sass/libsass.git",
+                                    "tag": "3.6.4"
+                                },
+                                {
+                                    "type": "script",
+                                    "dest-filename": "autogen.sh",
+                                    "commands": [
+                                        "autoreconf -si"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         },
@@ -137,7 +95,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/python-pillow/Pillow",
-                    "tag": "8.1.2"
+                    "tag": "8.4.0"
                 }
             ]
         },
@@ -167,7 +125,7 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GabMus/HydraPaper",
-                    "tag": "3.1.0"
+                    "tag": "3.2.0"
                 }
             ]
         }
