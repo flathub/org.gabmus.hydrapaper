@@ -13,7 +13,6 @@
         "--talk-name=org.freedesktop.Flatpak",
         "--talk-name=org.gnome.Mutter.DisplayConfig",
         "--filesystem=home:ro",
-        "--filesystem=/usr/share/gnome:ro",
         "--filesystem=~/.config/dconf:ro",
         "--filesystem=~/.config/sway/config:rw",
         "--filesystem=~/.swaylock/config:rw",
