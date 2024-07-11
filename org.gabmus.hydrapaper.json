@@ -46,6 +46,10 @@
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GabMus/HydraPaper",
                     "tag": "3.3.2"
+                },
+                {
+                    "type": "patch",
+                    "path": "appstream.patch"
                 }
             ]
         }
