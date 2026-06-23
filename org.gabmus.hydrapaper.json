@@ -2,7 +2,7 @@
     "app-id": "org.gabmus.hydrapaper",
     "command": "hydrapaper",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "45",
+    "runtime-version": "50",
     "sdk": "org.gnome.Sdk",
     "finish-args": [
         "--share=ipc",
@@ -18,26 +18,26 @@
         "--filesystem=~/.swaylock/config:rw",
         "--metadata=X-DConf=migrate-path=/org/gabmus/hydrapaper/"
     ],
+    "cleanup": [
+        "/include",
+        "/lib/pkgconfig"
+    ],
     "modules": [
-        "python-deps.json",
+        "python3-requirements.yaml",
         {
-            "name": "blueprint-compiler",
+            "name": "python3-dbus-python",
             "buildsystem": "meson",
-            "cleanup": [
-                "*"
-            ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler/-/archive/v0.10.0/blueprint-compiler-v0.10.0.tar.gz",
-                    "sha256": "2bc729b36897d0959a9890fb0997c9847aa9d2fc9356520bd8a46ed0b51ff4c0"
+                    "url": "https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.4.0.tar.xz",
+                    "sha256": "c36b28f10ffcc8f1f798aca973bcc132f91f33eb9b6b8904381b4077766043d5"
                 }
             ]
         },
         {
             "name": "hydrapaper",
             "buildsystem": "meson",
-            "builddir": true,
             "config-opts": [
                 "--buildtype=release"
             ],
