@@ -42,7 +42,8 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GabMus/HydraPaper",
-                    "tag": "3.3.2"
+                    "tag": "3.3.2",
+                    "commit": "4589088da390362906ac9fecb8d4b26f594656d9"
                 },
                 {
                     "type": "patch",
