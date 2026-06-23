@@ -13,9 +13,6 @@
         "--talk-name=org.freedesktop.Flatpak",
         "--talk-name=org.gnome.Mutter.DisplayConfig",
         "--filesystem=home:ro",
-        "--filesystem=~/.config/dconf:ro",
-        "--filesystem=~/.config/sway/config:rw",
-        "--filesystem=~/.swaylock/config:rw",
         "--metadata=X-DConf=migrate-path=/org/gabmus/hydrapaper/"
     ],
     "cleanup": [
